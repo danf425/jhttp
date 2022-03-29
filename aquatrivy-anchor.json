@@ -1,0 +1,888 @@
+{
+    "SchemaVersion": 2,
+    "ArtifactName": "docker.io/nodegoat:master",
+    "ArtifactType": "container_image",
+    "Metadata": {
+      "OS": {
+        "Family": "alpine",
+        "Name": "3.15.0"
+      },
+      "ImageID": "sha256:806f406d70405a72f47b0c96be2a355113cb67743d0ba4d4bb3c010214117b8d",
+      "DiffIDs": [
+        "sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759",
+        "sha256:62549ded9a3170431ff4d6d68d3b3064debd52d2ca2067350d14a6da160a6d97",
+        "sha256:4eb06231aba486832cd8a47a1e359d6048142e24355712b78d09c83a05f950e7",
+        "sha256:cc7d7abf9a7f214e73bb3d48d8bcbc3708b3518340c457d5cdb735ebebceed70",
+        "sha256:0cf58e006a5988616900f84b2e0af2068f152cf5748cdc8a8ac2f60d165821ee",
+        "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1",
+        "sha256:e16cdc780c72526ae420a3489a377cf70d9c0b613629ab172c9aea5493ebe9a2",
+        "sha256:4153a0f6137f4eb3f0ca44bdb9e0bd109638adbca29f08a6d6fb8304ae75170c"
+      ],
+      "RepoTags": [
+        "nodegoat:master"
+      ],
+      "ImageConfig": {
+        "architecture": "amd64",
+        "container": "52f3cd0eb396c80a77d13256edf67aa7d30f77636d29da1557545d230345df18",
+        "created": "2022-02-01T17:49:04.371005085Z",
+        "docker_version": "20.10.12",
+        "history": [
+          {
+            "created": "2021-11-24T20:19:40Z",
+            "created_by": "/bin/sh -c #(nop) ADD file:9233f6f2237d79659a9521f7e390df217cec49f1a8aa3a12147bbca1956acdb9 in / "
+          },
+          {
+            "created": "2021-11-24T20:19:40Z",
+            "created_by": "/bin/sh -c #(nop)  CMD [\"/bin/sh\"]",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-01-11T21:23:29Z",
+            "created_by": "/bin/sh -c #(nop)  ENV NODE_VERSION=12.22.9",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-01-11T21:23:40Z",
+            "created_by": "/bin/sh -c addgroup -g 1000 node     \u0026\u0026 adduser -u 1000 -G node -s /bin/sh -D node     \u0026\u0026 apk add --no-cache         libstdc++     \u0026\u0026 apk add --no-cache --virtual .build-deps         curl     \u0026\u0026 ARCH= \u0026\u0026 alpineArch=\"$(apk --print-arch)\"       \u0026\u0026 case \"${alpineArch##*-}\" in         x86_64)           ARCH='x64'           CHECKSUM=\"bda831fbebfc00d12dbbc59b6d3736350d8cfbd495753c725800db10e591eb20\"           ;;         *) ;;       esac   \u0026\u0026 if [ -n \"${CHECKSUM}\" ]; then     set -eu;     curl -fsSLO --compressed \"https://unofficial-builds.nodejs.org/download/release/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\";     echo \"$CHECKSUM  node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\" | sha256sum -c -       \u0026\u0026 tar -xJf \"node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\" -C /usr/local --strip-components=1 --no-same-owner       \u0026\u0026 ln -s /usr/local/bin/node /usr/local/bin/nodejs;   else     echo \"Building from source\"     \u0026\u0026 apk add --no-cache --virtual .build-deps-full         binutils-gold         g++         gcc         gnupg         libgcc         linux-headers         make         python2     \u0026\u0026 for key in       4ED778F539E3634C779C87C6D7062848A1AB005C       94AE36675C464D64BAFA68DD7434390BDBE9B9C5       74F12602B6F1C4E913FAA37AD3A89613643B6201       71DCFD284A79C3B38668286BC97EC7A07EDE3FC1       8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600       C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8       C82FA3AE1CBEDC6BE46B9360C43CEC45C17AB93C       DD8F2338BAE7501E3DD5AC78C273792F7D83545D       A48C2BEE680E841632CD4E44F07496B3EB3C1762       108F52B48DB57BB0CC439B2997B01419BD92F80A       B9E2F5981AA6E0CD28160D9FF13993A75599653C     ; do       gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" ||       gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" ;     done     \u0026\u0026 curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz\"     \u0026\u0026 curl -fsSLO --compressed \"https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc\"     \u0026\u0026 gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc     \u0026\u0026 grep \" node-v$NODE_VERSION.tar.xz\\$\" SHASUMS256.txt | sha256sum -c -     \u0026\u0026 tar -xf \"node-v$NODE_VERSION.tar.xz\"     \u0026\u0026 cd \"node-v$NODE_VERSION\"     \u0026\u0026 ./configure     \u0026\u0026 make -j$(getconf _NPROCESSORS_ONLN) V=     \u0026\u0026 make install     \u0026\u0026 apk del .build-deps-full     \u0026\u0026 cd ..     \u0026\u0026 rm -Rf \"node-v$NODE_VERSION\"     \u0026\u0026 rm \"node-v$NODE_VERSION.tar.xz\" SHASUMS256.txt.asc SHASUMS256.txt;   fi   \u0026\u0026 rm -f \"node-v$NODE_VERSION-linux-$ARCH-musl.tar.xz\"   \u0026\u0026 apk del .build-deps   \u0026\u0026 node --version   \u0026\u0026 npm --version"
+          },
+          {
+            "created": "2022-01-11T21:23:41Z",
+            "created_by": "/bin/sh -c #(nop)  ENV YARN_VERSION=1.22.17",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-01-12T00:13:24Z",
+            "created_by": "/bin/sh -c apk add --no-cache --virtual .build-deps-yarn curl gnupg tar   \u0026\u0026 for key in     6A010C5166006599AA17F08146C2130DFD2497F5   ; do     gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys \"$key\" ||     gpg --batch --keyserver keyserver.ubuntu.com --recv-keys \"$key\" ;   done   \u0026\u0026 curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz\"   \u0026\u0026 curl -fsSLO --compressed \"https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc\"   \u0026\u0026 gpg --batch --verify yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   \u0026\u0026 mkdir -p /opt   \u0026\u0026 tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/   \u0026\u0026 ln -s /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn   \u0026\u0026 ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg   \u0026\u0026 rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz   \u0026\u0026 apk del .build-deps-yarn   \u0026\u0026 yarn --version"
+          },
+          {
+            "created": "2022-01-12T00:13:24Z",
+            "created_by": "/bin/sh -c #(nop) COPY file:4d192565a7220e135cab6c77fbc1c73211b69f3d9fb37e62857b2c6eb9363d51 in /usr/local/bin/ "
+          },
+          {
+            "created": "2022-01-12T00:13:25Z",
+            "created_by": "/bin/sh -c #(nop)  ENTRYPOINT [\"docker-entrypoint.sh\"]",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-01-12T00:13:25Z",
+            "created_by": "/bin/sh -c #(nop)  CMD [\"node\"]",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-02-01T17:48:45Z",
+            "created_by": "/bin/sh -c #(nop)  ENV USER=node",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-02-01T17:48:45Z",
+            "created_by": "/bin/sh -c #(nop)  ENV WORKDIR=/home/node/app",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-02-01T17:48:45Z",
+            "created_by": "/bin/sh -c #(nop) WORKDIR /home/node/app",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-02-01T17:48:58Z",
+            "created_by": "/bin/sh -c #(nop) COPY dir:c6f7dc292021915280edefa02d163e1476681ab49e5b868f2270de08256de35b in node_modules "
+          },
+          {
+            "created": "2022-02-01T17:49:02Z",
+            "created_by": "/bin/sh -c chown $USER:$USER $WORKDIR",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-02-01T17:49:03Z",
+            "created_by": "/bin/sh -c #(nop) COPY --chown=nodedir:698210d776bebdee604279dd5d905ceb0d6a4609263e753c72ea09dbb47d85d3 in /home/node/app "
+          },
+          {
+            "created": "2022-02-01T17:49:03Z",
+            "created_by": "/bin/sh -c #(nop)  USER node",
+            "empty_layer": true
+          },
+          {
+            "created": "2022-02-01T17:49:04Z",
+            "created_by": "/bin/sh -c #(nop)  EXPOSE 4000",
+            "empty_layer": true
+          }
+        ],
+        "os": "linux",
+        "rootfs": {
+          "type": "layers",
+          "diff_ids": [
+            "sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759",
+            "sha256:62549ded9a3170431ff4d6d68d3b3064debd52d2ca2067350d14a6da160a6d97",
+            "sha256:4eb06231aba486832cd8a47a1e359d6048142e24355712b78d09c83a05f950e7",
+            "sha256:cc7d7abf9a7f214e73bb3d48d8bcbc3708b3518340c457d5cdb735ebebceed70",
+            "sha256:0cf58e006a5988616900f84b2e0af2068f152cf5748cdc8a8ac2f60d165821ee",
+            "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1",
+            "sha256:e16cdc780c72526ae420a3489a377cf70d9c0b613629ab172c9aea5493ebe9a2",
+            "sha256:4153a0f6137f4eb3f0ca44bdb9e0bd109638adbca29f08a6d6fb8304ae75170c"
+          ]
+        },
+        "config": {
+          "Cmd": [
+            "node"
+          ],
+          "Entrypoint": [
+            "docker-entrypoint.sh"
+          ],
+          "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+            "NODE_VERSION=12.22.9",
+            "YARN_VERSION=1.22.17",
+            "USER=node",
+            "WORKDIR=/home/node/app"
+          ],
+          "Image": "sha256:91a684c59cc72778e7979e5a88f1b588185e26182cec65c78d9d81df05e2cb5d",
+          "User": "node",
+          "WorkingDir": "/home/node/app"
+        }
+      }
+    },
+    "Results": [
+      {
+        "Target": "docker.io/nodegoat:master (alpine 3.15.0)",
+        "Class": "os-pkgs",
+        "Type": "alpine"
+      },
+      {
+        "Target": "Node.js",
+        "Class": "lang-pkgs",
+        "Type": "node-pkg",
+        "Vulnerabilities": [
+          {
+            "VulnerabilityID": "CVE-2021-3807",
+            "PkgName": "ansi-regex",
+            "PkgPath": "usr/local/lib/node_modules/npm/node_modules/string-width/node_modules/ansi-regex/package.json",
+            "InstalledVersion": "3.0.0",
+            "FixedVersion": "5.0.1, 6.0.1",
+            "Layer": {
+              "DiffID": "sha256:62549ded9a3170431ff4d6d68d3b3064debd52d2ca2067350d14a6da160a6d97"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-3807",
+            "Title": "nodejs-ansi-regex: Regular expression denial of service (ReDoS) matching ANSI escape codes",
+            "Description": "ansi-regex is vulnerable to Inefficient Regular Expression Complexity",
+            "Severity": "HIGH",
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:C",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V2Score": 7.8,
+                "V3Score": 7.5
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V3Score": 7.5
+              }
+            },
+            "References": [
+              "https://app.snyk.io/vuln/SNYK-JS-ANSIREGEX-1583908",
+              "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
+              "https://github.com/chalk/ansi-regex/commit/8d1d7cdb586269882c4bdc1b7325d0c58c8f76f9",
+              "https://github.com/chalk/ansi-regex/issues/38#issuecomment-924086311",
+              "https://github.com/chalk/ansi-regex/issues/38#issuecomment-925924774",
+              "https://huntr.dev/bounties/5b3cf33b-ede0-4398-9974-800876dfd994",
+              "https://linux.oracle.com/cve/CVE-2021-3807.html",
+              "https://linux.oracle.com/errata/ELSA-2021-5171.html",
+              "https://nvd.nist.gov/vuln/detail/CVE-2021-3807"
+            ],
+            "PublishedDate": "2021-09-17T07:15:00Z",
+            "LastModifiedDate": "2021-10-19T13:11:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2021-3807",
+            "PkgName": "ansi-regex",
+            "PkgPath": "usr/local/lib/node_modules/npm/node_modules/yargs/node_modules/ansi-regex/package.json",
+            "InstalledVersion": "4.1.0",
+            "FixedVersion": "5.0.1, 6.0.1",
+            "Layer": {
+              "DiffID": "sha256:62549ded9a3170431ff4d6d68d3b3064debd52d2ca2067350d14a6da160a6d97"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-3807",
+            "Title": "nodejs-ansi-regex: Regular expression denial of service (ReDoS) matching ANSI escape codes",
+            "Description": "ansi-regex is vulnerable to Inefficient Regular Expression Complexity",
+            "Severity": "HIGH",
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:C",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V2Score": 7.8,
+                "V3Score": 7.5
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V3Score": 7.5
+              }
+            },
+            "References": [
+              "https://app.snyk.io/vuln/SNYK-JS-ANSIREGEX-1583908",
+              "https://github.com/advisories/GHSA-93q8-gq69-wqmw",
+              "https://github.com/chalk/ansi-regex/commit/8d1d7cdb586269882c4bdc1b7325d0c58c8f76f9",
+              "https://github.com/chalk/ansi-regex/issues/38#issuecomment-924086311",
+              "https://github.com/chalk/ansi-regex/issues/38#issuecomment-925924774",
+              "https://huntr.dev/bounties/5b3cf33b-ede0-4398-9974-800876dfd994",
+              "https://linux.oracle.com/cve/CVE-2021-3807.html",
+              "https://linux.oracle.com/errata/ELSA-2021-5171.html",
+              "https://nvd.nist.gov/vuln/detail/CVE-2021-3807"
+            ],
+            "PublishedDate": "2021-09-17T07:15:00Z",
+            "LastModifiedDate": "2021-10-19T13:11:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2017-16137",
+            "PkgName": "debug",
+            "PkgPath": "home/node/app/node_modules/connect/node_modules/debug/package.json",
+            "InstalledVersion": "2.2.0",
+            "FixedVersion": "3.1.0, 2.6.9",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2017-16137",
+            "Title": "nodejs-debug: Regular expression Denial of Service",
+            "Description": "The debug module is vulnerable to regular expression denial of service when untrusted user input is passed into the o formatter. It takes around 50k characters to block for 2 seconds making this a low severity issue.",
+            "Severity": "MEDIUM",
+            "CweIDs": [
+              "CWE-400"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+                "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                "V2Score": 5,
+                "V3Score": 5.3
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                "V3Score": 5.3
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-gxpj-cx7g-858c",
+              "https://github.com/visionmedia/debug/issues/501",
+              "https://github.com/visionmedia/debug/pull/504",
+              "https://lists.apache.org/thread.html/r8ba4c628fba7181af58817d452119481adce4ba92e889c643e4c7dd3@%3Ccommits.netbeans.apache.org%3E",
+              "https://lists.apache.org/thread.html/rb5ac16fad337d1f3bb7079549f97d8166d0ef3082629417c39f12d63@%3Cnotifications.netbeans.apache.org%3E",
+              "https://nodesecurity.io/advisories/534",
+              "https://nvd.nist.gov/vuln/detail/CVE-2017-16137",
+              "https://www.npmjs.com/advisories/534"
+            ],
+            "PublishedDate": "2018-06-07T02:29:00Z",
+            "LastModifiedDate": "2019-10-09T23:24:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2020-28469",
+            "PkgName": "glob-parent",
+            "PkgPath": "home/node/app/node_modules/glob-parent/package.json",
+            "InstalledVersion": "3.1.0",
+            "FixedVersion": "5.1.2",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-28469",
+            "Title": "nodejs-glob-parent: Regular expression denial of service",
+            "Description": "This affects the package glob-parent before 5.1.2. The enclosure regex used to check for strings ending in enclosure containing path separator.",
+            "Severity": "HIGH",
+            "CweIDs": [
+              "CWE-400"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V2Score": 5,
+                "V3Score": 7.5
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V3Score": 7.5
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-ww39-953v-wcq6",
+              "https://github.com/gulpjs/glob-parent/blob/6ce8d11f2f1ed8e80a9526b1dc8cf3aa71f43474/index.js%23L9",
+              "https://github.com/gulpjs/glob-parent/pull/36",
+              "https://github.com/gulpjs/glob-parent/releases/tag/v5.1.2",
+              "https://linux.oracle.com/cve/CVE-2020-28469.html",
+              "https://linux.oracle.com/errata/ELSA-2021-5171.html",
+              "https://nvd.nist.gov/vuln/detail/CVE-2020-28469",
+              "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSBOWERGITHUBES128-1059093",
+              "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1059092",
+              "https://snyk.io/vuln/SNYK-JS-GLOBPARENT-1016905"
+            ],
+            "PublishedDate": "2021-06-03T16:15:00Z",
+            "LastModifiedDate": "2021-06-11T18:37:00Z"
+          },
+          {
+            "VulnerabilityID": "GHSA-c3m8-x3cg-qm2c",
+            "PkgName": "helmet-csp",
+            "PkgPath": "home/node/app/node_modules/helmet-csp/package.json",
+            "InstalledVersion": "1.2.2",
+            "FixedVersion": "2.9.1",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "PrimaryURL": "https://github.com/advisories/GHSA-c3m8-x3cg-qm2c",
+            "Title": "Configuration Override in helmet-csp",
+            "Description": "Versions of `helmet-csp` before to 2.9.1 are vulnerable to a Configuration Override affecting the application's Content Security Policy (CSP). The package's browser sniffing for Firefox deletes the `default-src` CSP policy, which is the fallback policy. This allows an attacker to remove an application's default CSP, possibly rendering the application vulnerable to Cross-Site Scripting.\n\n\n## Recommendation\n\nUpgrade to version 2.9.1 or later. Setting the `browserSniff` configuration to `false` in vulnerable versions also mitigates the issue.",
+            "Severity": "MEDIUM",
+            "References": [
+              "https://github.com/advisories/GHSA-c3m8-x3cg-qm2c",
+              "https://github.com/helmetjs/csp/commit/67a69baafa8198a154f0505a0cf0875f76f6186a",
+              "https://snyk.io/vuln/SNYK-JS-HELMETCSP-469436",
+              "https://www.npmjs.com/advisories/1176"
+            ]
+          },
+          {
+            "VulnerabilityID": "CVE-2021-3820",
+            "PkgName": "i",
+            "PkgPath": "home/node/app/node_modules/i/package.json",
+            "InstalledVersion": "0.3.6",
+            "FixedVersion": "0.3.7",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-3820",
+            "Title": "Inefficient Regular Expression in inflect",
+            "Description": "inflect is vulnerable to Inefficient Regular Expression Complexity",
+            "Severity": "HIGH",
+            "CweIDs": [
+              "CWE-697"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V2Score": 5,
+                "V3Score": 7.5
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-x55w-vjjp-222r",
+              "https://github.com/pksunkara/inflect/commit/a9a0a8e9561c3487854c7cae42565d9652ec858b",
+              "https://huntr.dev/bounties/4612b31a-072b-4f61-a916-c7e4cbc2042a",
+              "https://nvd.nist.gov/vuln/detail/CVE-2021-3820"
+            ],
+            "PublishedDate": "2021-09-27T13:15:00Z",
+            "LastModifiedDate": "2021-10-01T00:04:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2020-7788",
+            "PkgName": "ini",
+            "PkgPath": "home/node/app/node_modules/ini/package.json",
+            "InstalledVersion": "1.3.5",
+            "FixedVersion": "1.3.6",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7788",
+            "Title": "nodejs-ini: Prototype pollution via malicious INI file",
+            "Description": "This affects the package ini before 1.3.6. If an attacker submits a malicious INI file to an application that parses it with ini.parse, they will pollute the prototype on the application. This can be exploited further depending on the context.",
+            "Severity": "HIGH",
+            "CweIDs": [
+              "CWE-400"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V2Score": 7.5,
+                "V3Score": 7.3
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V3Score": 7.3
+              }
+            },
+            "References": [
+              "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7788",
+              "https://github.com/advisories/GHSA-qqgx-2p2h-9c37",
+              "https://github.com/npm/ini/commit/56d2805e07ccd94e2ba0984ac9240ff02d44b6f1",
+              "https://github.com/npm/ini/commit/56d2805e07ccd94e2ba0984ac9240ff02d44b6f1 (v1.3.6)",
+              "https://linux.oracle.com/cve/CVE-2020-7788.html",
+              "https://linux.oracle.com/errata/ELSA-2021-5171.html",
+              "https://lists.debian.org/debian-lts-announce/2020/12/msg00032.html",
+              "https://nvd.nist.gov/vuln/detail/CVE-2020-7788",
+              "https://snyk.io/vuln/SNYK-JS-INI-1048974",
+              "https://www.npmjs.com/advisories/1589"
+            ],
+            "PublishedDate": "2020-12-11T11:15:00Z",
+            "LastModifiedDate": "2021-07-21T11:39:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2021-3918",
+            "PkgName": "json-schema",
+            "PkgPath": "usr/local/lib/node_modules/npm/node_modules/json-schema/package.json",
+            "InstalledVersion": "0.2.3",
+            "FixedVersion": "0.4.0",
+            "Layer": {
+              "DiffID": "sha256:62549ded9a3170431ff4d6d68d3b3064debd52d2ca2067350d14a6da160a6d97"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-3918",
+            "Title": "nodejs-json-schema: Prototype pollution vulnerability",
+            "Description": "json-schema is vulnerable to Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')",
+            "Severity": "CRITICAL",
+            "CweIDs": [
+              "CWE-915"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "V2Score": 7.5,
+                "V3Score": 9.8
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "V3Score": 9.8
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-896r-f27r-55mw",
+              "https://github.com/kriszyp/json-schema/commit/22f146111f541d9737e832823699ad3528ca7741",
+              "https://github.com/kriszyp/json-schema/commit/b62f1da1ff5442f23443d6be6a92d00e65cba93a",
+              "https://github.com/kriszyp/json-schema/commit/f6f6a3b02d667aa4ba2d5d50cc19208c4462abfa",
+              "https://huntr.dev/bounties/bb6ccd63-f505-4e3a-b55f-cd2662c261a9",
+              "https://linux.oracle.com/cve/CVE-2021-3918.html",
+              "https://linux.oracle.com/errata/ELSA-2021-5171.html",
+              "https://nvd.nist.gov/vuln/detail/CVE-2021-3918"
+            ],
+            "PublishedDate": "2021-11-13T09:15:00Z",
+            "LastModifiedDate": "2021-11-16T18:46:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2019-20149",
+            "PkgName": "kind-of",
+            "PkgPath": "home/node/app/node_modules/define-property/node_modules/kind-of/package.json",
+            "InstalledVersion": "6.0.2",
+            "FixedVersion": "6.0.3",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-20149",
+            "Title": "nodejs-kind-of: ctorName in index.js allows external user input to overwrite certain internal attributes",
+            "Description": "ctorName in index.js in kind-of v6.0.2 allows external user input to overwrite certain internal attributes via a conflicting name, as demonstrated by 'constructor': {'name':'Symbol'}. Hence, a crafted payload can overwrite this builtin attribute to manipulate the type detection result.",
+            "Severity": "HIGH",
+            "CweIDs": [
+              "CWE-668"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:P/A:N",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+                "V2Score": 5,
+                "V3Score": 7.5
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+                "V3Score": 5.9
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-6c8f-qphg-qjgp",
+              "https://github.com/jonschlinkert/kind-of/commit/1df992ce6d5a1292048e5fe9c52c5382f941ee0b",
+              "https://github.com/jonschlinkert/kind-of/issues/30",
+              "https://github.com/jonschlinkert/kind-of/pull/31",
+              "https://nvd.nist.gov/vuln/detail/CVE-2019-20149",
+              "https://snyk.io/vuln/SNYK-JS-KINDOF-537849",
+              "https://www.npmjs.com/advisories/1490"
+            ],
+            "PublishedDate": "2019-12-30T19:15:00Z",
+            "LastModifiedDate": "2020-08-24T17:37:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2022-21680",
+            "PkgName": "marked",
+            "PkgPath": "home/node/app/node_modules/marked/package.json",
+            "InstalledVersion": "0.3.9",
+            "FixedVersion": "4.0.10",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-21680",
+            "Title": "Inefficient Regular Expression Complexity in marked",
+            "Description": "Marked is a markdown parser and compiler. Prior to version 4.0.10, the regular expression `block.def` may cause catastrophic backtracking against some strings and lead to a regular expression denial of service (ReDoS). Anyone who runs untrusted markdown through a vulnerable version of marked and does not use a worker with a time limit may be affected. This issue is patched in version 4.0.10. As a workaround, avoid running untrusted markdown through marked or run marked on a worker thread and set a reasonable time limit to prevent draining resources.",
+            "Severity": "HIGH",
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V2Score": 5,
+                "V3Score": 7.5
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-rrrm-qjm4-v8hf",
+              "https://github.com/markedjs/marked/commit/c4a3ccd344b6929afa8a1d50ac54a721e57012c0",
+              "https://github.com/markedjs/marked/releases/tag/v4.0.10",
+              "https://github.com/markedjs/marked/security/advisories/GHSA-rrrm-qjm4-v8hf",
+              "https://nvd.nist.gov/vuln/detail/CVE-2022-21680"
+            ],
+            "PublishedDate": "2022-01-14T17:15:00Z",
+            "LastModifiedDate": "2022-01-24T19:31:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2022-21681",
+            "PkgName": "marked",
+            "PkgPath": "home/node/app/node_modules/marked/package.json",
+            "InstalledVersion": "0.3.9",
+            "FixedVersion": "4.0.10",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2022-21681",
+            "Title": "Inefficient Regular Expression Complexity in marked",
+            "Description": "Marked is a markdown parser and compiler. Prior to version 4.0.10, the regular expression `inline.reflinkSearch` may cause catastrophic backtracking against some strings and lead to a denial of service (DoS). Anyone who runs untrusted markdown through a vulnerable version of marked and does not use a worker with a time limit may be affected. This issue is patched in version 4.0.10. As a workaround, avoid running untrusted markdown through marked or run marked on a worker thread and set a reasonable time limit to prevent draining resources.",
+            "Severity": "HIGH",
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V2Score": 5,
+                "V3Score": 7.5
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-5v2h-r2cx-5xgj",
+              "https://github.com/markedjs/marked/commit/8f806573a3f6c6b7a39b8cdb66ab5ebb8d55a5f5",
+              "https://github.com/markedjs/marked/security/advisories/GHSA-5v2h-r2cx-5xgj",
+              "https://nvd.nist.gov/vuln/detail/CVE-2022-21681"
+            ],
+            "PublishedDate": "2022-01-14T17:15:00Z",
+            "LastModifiedDate": "2022-01-24T19:33:00Z"
+          },
+          {
+            "VulnerabilityID": "GHSA-xf5p-87ch-gxw2",
+            "PkgName": "marked",
+            "PkgPath": "home/node/app/node_modules/marked/package.json",
+            "InstalledVersion": "0.3.9",
+            "FixedVersion": "0.3.18",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "PrimaryURL": "https://github.com/advisories/GHSA-xf5p-87ch-gxw2",
+            "Title": "Regular Expression Denial of Service in marked",
+            "Description": "Versions of `marked` prior to 0.6.2 and later than 0.3.14 are vulnerable to Regular Expression Denial of Service. Email addresses may be evaluated in quadratic time, allowing attackers to potentially crash the node process due to resource exhaustion.\n\n\n## Recommendation\n\nUpgrade to version 0.6.2 or later.",
+            "Severity": "MEDIUM",
+            "References": [
+              "https://github.com/advisories/GHSA-xf5p-87ch-gxw2",
+              "https://github.com/markedjs/marked/commit/b15e42b67cec9ded8505e9d68bb8741ad7a9590d",
+              "https://github.com/markedjs/marked/issues/1070",
+              "https://github.com/markedjs/marked/pull/1460",
+              "https://snyk.io/vuln/SNYK-JS-MARKED-174116",
+              "https://www.npmjs.com/advisories/812"
+            ]
+          },
+          {
+            "VulnerabilityID": "CVE-2020-7598",
+            "PkgName": "minimist",
+            "PkgPath": "home/node/app/node_modules/minimist/package.json",
+            "InstalledVersion": "0.0.10",
+            "FixedVersion": "1.2.3, 0.2.1",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7598",
+            "Title": "nodejs-minimist: prototype pollution allows adding or modifying properties of Object.prototype using a constructor or __proto__ payload",
+            "Description": "minimist before 1.2.2 could be tricked into adding or modifying properties of Object.prototype using a \"constructor\" or \"__proto__\" payload.",
+            "Severity": "MEDIUM",
+            "CweIDs": [
+              "CWE-20"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V2Score": 6.8,
+                "V3Score": 5.6
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V3Score": 5.6
+              }
+            },
+            "References": [
+              "http://lists.opensuse.org/opensuse-security-announce/2020-06/msg00024.html",
+              "https://github.com/advisories/GHSA-vh95-rmgr-6w4m",
+              "https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab",
+              "https://github.com/substack/minimist/commit/4cf1354839cb972e38496d35e12f806eea92c11f#diff-a1e0ee62c91705696ddb71aa30ad4f95",
+              "https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94",
+              "https://linux.oracle.com/cve/CVE-2020-7598.html",
+              "https://linux.oracle.com/errata/ELSA-2020-2852.html",
+              "https://nvd.nist.gov/vuln/detail/CVE-2020-7598",
+              "https://snyk.io/vuln/SNYK-JS-MINIMIST-559764",
+              "https://www.npmjs.com/advisories/1179"
+            ],
+            "PublishedDate": "2020-03-11T23:15:00Z",
+            "LastModifiedDate": "2021-07-21T11:39:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2020-7598",
+            "PkgName": "minimist",
+            "PkgPath": "home/node/app/node_modules/mkdirp/node_modules/minimist/package.json",
+            "InstalledVersion": "0.0.8",
+            "FixedVersion": "1.2.3, 0.2.1",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2020-7598",
+            "Title": "nodejs-minimist: prototype pollution allows adding or modifying properties of Object.prototype using a constructor or __proto__ payload",
+            "Description": "minimist before 1.2.2 could be tricked into adding or modifying properties of Object.prototype using a \"constructor\" or \"__proto__\" payload.",
+            "Severity": "MEDIUM",
+            "CweIDs": [
+              "CWE-20"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V2Score": 6.8,
+                "V3Score": 5.6
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V3Score": 5.6
+              }
+            },
+            "References": [
+              "http://lists.opensuse.org/opensuse-security-announce/2020-06/msg00024.html",
+              "https://github.com/advisories/GHSA-vh95-rmgr-6w4m",
+              "https://github.com/substack/minimist/commit/38a4d1caead72ef99e824bb420a2528eec03d9ab",
+              "https://github.com/substack/minimist/commit/4cf1354839cb972e38496d35e12f806eea92c11f#diff-a1e0ee62c91705696ddb71aa30ad4f95",
+              "https://github.com/substack/minimist/commit/63e7ed05aa4b1889ec2f3b196426db4500cbda94",
+              "https://linux.oracle.com/cve/CVE-2020-7598.html",
+              "https://linux.oracle.com/errata/ELSA-2020-2852.html",
+              "https://nvd.nist.gov/vuln/detail/CVE-2020-7598",
+              "https://snyk.io/vuln/SNYK-JS-MINIMIST-559764",
+              "https://www.npmjs.com/advisories/1179"
+            ],
+            "PublishedDate": "2020-03-11T23:15:00Z",
+            "LastModifiedDate": "2021-07-21T11:39:00Z"
+          },
+          {
+            "VulnerabilityID": "GHSA-mh5c-679w-hh4r",
+            "PkgName": "mongodb",
+            "PkgPath": "home/node/app/node_modules/mongodb/package.json",
+            "InstalledVersion": "2.2.36",
+            "FixedVersion": "3.1.13",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "PrimaryURL": "https://github.com/advisories/GHSA-mh5c-679w-hh4r",
+            "Title": "Denial of Service in mongodb",
+            "Description": "Versions of `mongodb` prior to 3.1.13 are vulnerable to Denial of Service. The package fails to properly catch an exception when a collection name is invalid and the DB does not exist, crashing the application.\n\n\n## Recommendation\n\nUpgrade to version 3.1.13 or later.",
+            "Severity": "HIGH",
+            "References": [
+              "https://github.com/advisories/GHSA-mh5c-679w-hh4r",
+              "https://www.npmjs.com/advisories/1203"
+            ]
+          },
+          {
+            "VulnerabilityID": "CVE-2021-23440",
+            "PkgName": "set-value",
+            "PkgPath": "home/node/app/node_modules/union-value/node_modules/set-value/package.json",
+            "InstalledVersion": "0.4.3",
+            "FixedVersion": "2.0.1, 4.0.1",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-23440",
+            "Title": "nodejs-set-value: type confusion allows bypass of CVE-2019-10747",
+            "Description": "This affects the package set-value before \u003c2.0.1, \u003e=3.0.0 \u003c4.0.1. A type confusion vulnerability can lead to a bypass of CVE-2019-10747 when the user-provided keys used in the path parameter are arrays.",
+            "Severity": "CRITICAL",
+            "CweIDs": [
+              "CWE-843"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "V2Score": 7.5,
+                "V3Score": 9.8
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V3Score": 7.3
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-4jqc-8m5r-9rpr",
+              "https://github.com/jonschlinkert/set-value/commit/7cf8073bb06bf0c15e08475f9f952823b4576452",
+              "https://github.com/jonschlinkert/set-value/pull/33",
+              "https://nvd.nist.gov/vuln/detail/CVE-2021-23440",
+              "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1584212",
+              "https://snyk.io/vuln/SNYK-JS-SETVALUE-1540541",
+              "https://www.huntr.dev/bounties/2eae1159-01de-4f82-a177-7478a408c4a2/"
+            ],
+            "PublishedDate": "2021-09-12T13:15:00Z",
+            "LastModifiedDate": "2021-11-03T20:29:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2019-10747",
+            "PkgName": "set-value",
+            "PkgPath": "home/node/app/node_modules/set-value/package.json",
+            "InstalledVersion": "2.0.0",
+            "FixedVersion": "3.0.1, 2.0.1",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2019-10747",
+            "Title": "nodejs-set-value: prototype pollution in function set-value",
+            "Description": "set-value is vulnerable to Prototype Pollution in versions lower than 3.0.1. The function mixin-deep could be tricked into adding or modifying properties of Object.prototype using any of the constructor, prototype and _proto_ payloads.",
+            "Severity": "CRITICAL",
+            "CweIDs": [
+              "CWE-400"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "V2Score": 7.5,
+                "V3Score": 9.8
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:N",
+                "V3Score": 4.2
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-4g88-fppr-53pp",
+              "https://linux.oracle.com/cve/CVE-2019-10747.html",
+              "https://linux.oracle.com/errata/ELSA-2021-0549.html",
+              "https://lists.apache.org/thread.html/b46f35559c4a97cf74d2dd7fe5a48f8abf2ff37f879083920af9b292@%3Cdev.drat.apache.org%3E",
+              "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/3EJ36KV6MXQPUYTFCCTDY54E5Y7QP3AV/",
+              "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/E3HNLQZQINMZK6GYB2UTKK4VU7WBV2OT/",
+              "https://nvd.nist.gov/vuln/detail/CVE-2019-10747",
+              "https://snyk.io/vuln/SNYK-JS-SETVALUE-450213",
+              "https://www.npmjs.com/advisories/1012"
+            ],
+            "PublishedDate": "2019-08-23T17:15:00Z",
+            "LastModifiedDate": "2019-10-29T22:15:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2021-23440",
+            "PkgName": "set-value",
+            "PkgPath": "home/node/app/node_modules/set-value/package.json",
+            "InstalledVersion": "2.0.0",
+            "FixedVersion": "2.0.1, 4.0.1",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2021-23440",
+            "Title": "nodejs-set-value: type confusion allows bypass of CVE-2019-10747",
+            "Description": "This affects the package set-value before \u003c2.0.1, \u003e=3.0.0 \u003c4.0.1. A type confusion vulnerability can lead to a bypass of CVE-2019-10747 when the user-provided keys used in the path parameter are arrays.",
+            "Severity": "CRITICAL",
+            "CweIDs": [
+              "CWE-843"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:P/I:P/A:P",
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+                "V2Score": 7.5,
+                "V3Score": 9.8
+              },
+              "redhat": {
+                "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L",
+                "V3Score": 7.3
+              }
+            },
+            "References": [
+              "https://github.com/advisories/GHSA-4jqc-8m5r-9rpr",
+              "https://github.com/jonschlinkert/set-value/commit/7cf8073bb06bf0c15e08475f9f952823b4576452",
+              "https://github.com/jonschlinkert/set-value/pull/33",
+              "https://nvd.nist.gov/vuln/detail/CVE-2021-23440",
+              "https://snyk.io/vuln/SNYK-JAVA-ORGWEBJARSNPM-1584212",
+              "https://snyk.io/vuln/SNYK-JS-SETVALUE-1540541",
+              "https://www.huntr.dev/bounties/2eae1159-01de-4f82-a177-7478a408c4a2/"
+            ],
+            "PublishedDate": "2021-09-12T13:15:00Z",
+            "LastModifiedDate": "2021-11-03T20:29:00Z"
+          },
+          {
+            "VulnerabilityID": "CVE-2015-8858",
+            "PkgName": "uglify-js",
+            "PkgPath": "home/node/app/node_modules/uglify-js/package.json",
+            "InstalledVersion": "2.4.24",
+            "FixedVersion": "\u003e=2.6.0",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "SeveritySource": "nvd",
+            "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2015-8858",
+            "Title": "Regular Expression Denial of Service",
+            "Description": "The uglify-js package before 2.6.0 for Node.js allows attackers to cause a denial of service (CPU consumption) via crafted input in a parse call, aka a \"regular expression denial of service (ReDoS).\"",
+            "Severity": "HIGH",
+            "CweIDs": [
+              "CWE-399"
+            ],
+            "CVSS": {
+              "nvd": {
+                "V2Vector": "AV:N/AC:L/Au:N/C:N/I:N/A:C",
+                "V3Vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "V2Score": 7.8,
+                "V3Score": 7.5
+              }
+            },
+            "References": [
+              "http://www.openwall.com/lists/oss-security/2016/04/20/11",
+              "http://www.securityfocus.com/bid/96409",
+              "https://github.com/advisories/GHSA-c9f4-xj24-8jqx",
+              "https://nodesecurity.io/advisories/48",
+              "https://nvd.nist.gov/vuln/detail/CVE-2015-8858",
+              "https://www.npmjs.com/advisories/48",
+              "https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS"
+            ],
+            "PublishedDate": "2017-01-23T21:59:00Z",
+            "LastModifiedDate": "2017-03-02T02:59:00Z"
+          },
+          {
+            "VulnerabilityID": "NSWG-ECO-445",
+            "PkgName": "utile",
+            "PkgPath": "home/node/app/node_modules/prompt/node_modules/utile/package.json",
+            "InstalledVersion": "0.2.1",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "Title": "Out-of-bounds Read",
+            "Description": "`utile` allocates uninitialized Buffers when number is passed in input",
+            "Severity": "LOW",
+            "References": [
+              "https://hackerone.com/reports/321701"
+            ]
+          },
+          {
+            "VulnerabilityID": "NSWG-ECO-445",
+            "PkgName": "utile",
+            "PkgPath": "home/node/app/node_modules/utile/package.json",
+            "InstalledVersion": "0.3.0",
+            "Layer": {
+              "DiffID": "sha256:d391a28d5ae679382cd55bc7c0d3f0bd4766d9b719b0bc5f56defadb4f18b0a1"
+            },
+            "Title": "Out-of-bounds Read",
+            "Description": "`utile` allocates uninitialized Buffers when number is passed in input",
+            "Severity": "LOW",
+            "References": [
+              "https://hackerone.com/reports/321701"
+            ]
+          }
+        ]
+      }
+    ]
+  }
